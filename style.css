@@ -1,965 +1,763 @@
-/* ===== VARIABLES & RESET ===== */
-:root {
-  --primary: #0f0f12;
-  --secondary: #121216;
-  --card-bg: #15151a;
-  --card-border: rgba(255, 255, 255, 0.03);
-  --text-primary: #d9d9e2;
-  --text-secondary: #9da0a9;
-  --text-muted: #8d8f95;
-  --accent: #39d353;
-  --danger: #ff4b4b;
-  --warning: #ffb74d;
-  --info: #64b5f6;
-  --success: #4caf50;
-  --sidebar-width: 240px;
-  --header-height: 60px;
-  --transition: all 0.3s ease;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--primary);
-  color: var(--text-primary);
-  overflow: hidden;
-}
-
-/* ===== LAYOUT ===== */
-.app {
-  display: flex;
-  height: 100vh;
-}
-
-/* ===== SIDEBAR ===== */
-.sidebar {
-  width: var(--sidebar-width);
-  background-color: var(--secondary);
-  border-right: 1px solid var(--card-border);
-  display: flex;
-  flex-direction: column;
-  padding: 20px 0;
-  transition: var(--transition);
-  z-index: 100;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 20px 20px;
-  border-bottom: 1px solid var(--card-border);
-  margin-bottom: 20px;
-}
-
-.brand .avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #2a2a2f, #111);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--card-border);
-  font-weight: bold;
-.brand-text h3 {
-  font-size: 14px;
-}
-
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-
-.brand-text .subtitle {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 0 12px;
-  flex: 1;
-  margin-top: -40px;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.nav-item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
-}
-
-.nav-item.active {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: var(--text-primary);
-  font-weight: 500;
-}
-
-.nav-item i {
-  width: 20px;
-  text-align: center;
-}
-
-.nav-footer {
-  padding: 20px 20px 0;
-  margin-top: auto;
-  border-top: 1px solid var(--card-border);
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-/* ===== MAIN CONTENT ===== */
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* ===== HEADER ===== */
-.header {
-  height: var(--header-height);
-  background-color: var(--secondary);
-  border-bottom: 1px solid var(--card-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.status-indicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.status-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--danger);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-.status-dot.sailing {
-  background-color: var(--success);
-}
-
-.header-title {
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.header-info {
-  display: flex;
-  gap: 20px;
-}
-
-.info-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.info-label {
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.info-value {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* ===== DASHBOARD CONTENT ===== */
-.dashboard-content {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-/* ===== GRID LAYOUT ===== */
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: minmax(50px, auto);
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-/* ===== CARDS ===== */
-.card {
-  background-color: var(--card-bg);
-  border-radius: 12px;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-  transition: var(--transition);
-  height: 450px;
-  width: 100%;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-.card-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--card-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.card-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.card-action {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
-  transition: var(--transition);
-}
-
-.card-action:hover {
-  color: var(--text-primary);
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.card-body {
-  padding: 10px;
-}
-
-/* ===== ROUTE SELECTION ===== */
-.route-selection {
-  grid-column: 1;
-  grid-row: 1;
-  align-self: flex-start;
-  height: auto;
-}
-
-.route-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.route-btn {
-  padding: 14px 16px;
-  border-radius: 8px;
-  background-color: var(--accent);
-  color: #111;
-  text-align: center;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  border: none;
-  font-size: 14px;
-}
-
-.route-btn:hover {
-  background-color: #2fc046;
-  transform: translateY(-2px);
-}
-
-
-.route-btn.secondary {
-  background-color: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--card-border);
-}
-
-.route-btn.secondary:hover {
-  background-color: #2fc046;
-  color: var(--text-primary);
-}
-
-.route-btn.start-btn {
-  background-color: var(--danger);
-  color: white;
-  border: none;
-}
-
-.route-btn.start-btn:hover {
-  background-color: #e04343;
-}
-
-/* ===== GEO INFO ===== */
-.geo-info {
-  grid-column: 2 / span 2;
-  grid-row: 1;
-  align-self: flex-start;
-  height: auto;
-}
-
-.geo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.geo-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--card-border);
-}
-
-.geo-label {
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-bottom: 6px;
-}
-
-.geo-value {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-/* ===== MAPS ===== */
-.satellite-map {
-  grid-column: 1;
-  grid-row: 2 / span 2;
-}
-
-.virtual-map {
-  grid-column: 3;
-  grid-row: 2 / span 2;
-}
-
-.map-container {
-  height: 367px;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-}
-
-.virtual-map .map-container {
-  background-color: #2b2b33;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 75.5px 73px;
-}
-
-.map-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.virtual-map .map-placeholder {
-  color: var(--text-secondary);
-}
-
-.map-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  gap: 4px;
-  width: 100%;
-  height: 100%;
-  padding: 12px;
-}
-
-.grid-cell {
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 2px;
-}
-
-.grid-cell.active {
-  background-color: rgba(57, 211, 83, 0.2);
-}
-
-.boat-marker {
-  grid-column: 8;
-  grid-row: 9;
-  width: 24px;
-  height: 24px;
-  background-color: var(--danger);
-  border-radius: 50%;
-  position: relative;
-  z-index: 10;
-}
-
-.boat-marker::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  background-color: white;
-  border-radius: 50%;
-}
-
-.destination-marker {
-  grid-column: 3;
-  grid-row: 2;
-  width: 16px;
-  height: 16px;
-  background-color: var(--accent);
-  border-radius: 50%;
-  position: relative;
-  z-index: 10;
-}
-
-/* ===== LOGS & STATUS ===== */
-.status-logs {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.logs-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.log-category {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.log-category-title {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-  margin-top: 15px; /* diperbaiki dari max-top */
-  text-align: center;
-  font-weight: bold;
-}
-
-
-.log-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-
-/* log pill status */
-
-.log-pillstatus {
-  padding: 10px 16px;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--card-border);
-  font-size: 13px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 80px;
-  margin: 0 14px;
-  margin-right: -13px;
-}
-
-.log-pillstatus:last-child {
-  margin-right: 0;
-}
-
-/* 
-log pill progress */
-
-.log-pillprogress{
-  padding: 10px 16px;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--card-border);
-  font-size: 13px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 80px;
-  margin: 0 2px;
-  margin-right: 2px;
-
-}
-
-.log-pillprogress:last-child {
-  margin-right: 0;
-}
-
-
-/* log pill sistem */
-
-
-.log-pillsistem{
-  padding: 10px 16px;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--card-border);
-  font-size: 13px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 80px;
-  margin: 0 35px;
-  margin-right: -22px;
-}
-
-.log-pillprogress:last-child {
-  margin-right: 0;
-}
-
-
-
-
-/* ===== IMAGING SECTIONS ===== */
-.imaging-section {
-  display: grid;
-  grid-template-columns: 1fr 300px 1fr;
-  gap: 20px;
-  margin-bottom: 20px;
-  margin-top: -70px;
-}
-
-.imaging-card {
-  height: 300px;
-}
-
-.imaging-placeholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #e6e6e6, #d4d4d4);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #8d8d8d;
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.center-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
-}
-
-.logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.logo-image {
-  width: 100px;
-  height: auto;
-  border-radius: 50%;
-  object-fit: contain;
-}
-
-.logo-text {
-  font-size: 28px;
-  font-weight: bold;
-  color: var(--text-primary);
-  opacity: 0.8;
-}
-
-.logo-subtitle {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-top: 8px;
-  line-height: 1.4;
-}
-
-.logo-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 10px;
-}
-
-/* ===== CHARTS ===== */
-.charts-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.chart-container {
-  height: 250px;
-  padding: 20px;
-}
-
-.chart-placeholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #1e1e24, #17171c);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  font-size: 16px;
-}
-
-/* ===== FOOTER ===== */
-.footer {
-  padding: 16px 20px;
-  background-color: var(--secondary);
-  border-top: 1px solid var(--card-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-info {
-  display: flex;
-  gap: 20px;
-}
-
-.footer-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer-label {
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.footer-value {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.progress-bars {
-  display: flex;
-  gap: 12px;
-}
-
-.progress-bar {
-  width: 120px;
-  height: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background-color: var(--accent);
-  border-radius: 4px;
-}
-
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1200px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .geo-info {
-    grid-column: 1 / span 2;
-  }
-  
-  .satellite-map {
-    grid-column: 1;
-    grid-row: 3;
-  }
-  
-  .status-logs {
-    grid-column: 2;
-    grid-row: 3;
-  }
-  
-  .virtual-map {
-    grid-column: 1 / span 2;
-    grid-row: 4;
-  }
-  
-  .imaging-section {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    width: 70px;
-  }
-  
-  .brand-text, .nav-text {
-    display: none;
-  }
-  
-  .nav-item {
-    justify-content: center;
-    padding: 16px 12px;
-  }
-  
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .geo-info, .satellite-map, .status-logs, .virtual-map {
-    grid-column: 1;
-  }
-  
-  .geo-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .header-info {
-    display: none;
-  }
-}
-
-/* ===== UTILITY CLASSES ===== */
-.text-success { color: var(--success); }
-.text-danger { color: var(--danger); }
-.text-warning { color: var(--warning); }
-.text-info { color: var(--info); }
-
-/* ===== SCROLLBAR STYLING ===== */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-
-
- .red-dot {
-            position: absolute;
-            width: 9px;
-            height: 9px;
-            background-color: #e74c3c;
-            border-radius: 50%;
-            border: 1px solid white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            transition: all 0.3s ease;
-            cursor: pointer;
+// ========================================
+// SHIP MONITORING SYSTEM - MERGED CODE
+// ========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ========================================
+    // NAVIGATION ACTIVE STATE
+    // ========================================
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            navItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // ========================================
+    // ROUTE SELECTION VARIABLES
+    // ========================================
+    let selectedRoute = null;
+    let isStarted = false;
+    let currentAnimationInterval = null;
+    let satellitePolyline = null; // Polyline untuk trail di Satellite Map (TANPA MARKER)
+
+    const routeButtons = document.querySelectorAll('.route-btn');
+    const lintasanABtn = routeButtons[0];
+    const lintasanBBtn = routeButtons[1];
+    const startBtn = routeButtons[2];
+
+    // ========================================
+    // PATH GENERATION FUNCTION
+    // ========================================
+    function generatePath(startTop, startLeft, directions, step = 5) {
+        const path = [];
+        let currentTop = startTop;
+        let currentLeft = startLeft;
+
+        directions.forEach(dir => {
+            switch (dir) {
+                case 'up':
+                    currentTop -= step;
+                    break;
+                case 'down':
+                    currentTop += step;
+                    break;
+                case 'left':
+                    currentLeft -= step;
+                    break;
+                case 'right':
+                    currentLeft += step;
+                    break;
+                case 'up-left':
+                    currentTop -= step;
+                    currentLeft -= step * 0.3;
+                    break;
+                case 'up-right':
+                    currentTop -= step;
+                    currentLeft += step * 0.3;
+                    break;
+                case 'down-left':
+                    currentTop += step;
+                    currentLeft -= step * 0.3;
+                    break;
+                case 'down-right':
+                    currentTop += step;
+                    currentLeft += step * 0.3;
+                    break;
+            }
+            path.push({ top: currentTop, left: currentLeft });
+        });
+
+        return path;
+    }
+
+    // ========================================
+    // PIXEL TO LAT/LNG CONVERSION
+    // ========================================
+    function pixelToLatLng(top, left, containerWidth, containerHeight) {
+        const bounds = {
+            north: 3.560089663827306,
+            south: 3.559089663827306,
+            west: 98.65696192628275,
+            east: 98.65796192628275
+        };
+
+        const normalizedX = left / containerWidth;
+        const normalizedY = top / containerHeight;
+
+        const lng = bounds.west + (normalizedX * (bounds.east - bounds.west));
+        const lat = bounds.north - (normalizedY * (bounds.north - bounds.south));
+
+        return [lat, lng];
+    }
+
+    // ========================================
+    // SHIP ANIMATION FUNCTION
+    // ========================================
+    function animateShip(container, shipIcon, path, speed = 250) {
+        // Hentikan animasi sebelumnya
+        if (currentAnimationInterval) {
+            clearInterval(currentAnimationInterval);
+            currentAnimationInterval = null;
         }
 
+        // Reset polyline
+        if (satellitePolyline) {
+            map.removeLayer(satellitePolyline);
+        }
+        const trailCoordinates = [];
 
-         
-        .green-dot {
-            position: absolute;
-            width: 9px;
-            height: 9px;
-            background-color: #2ecc71;
-            border-radius: 50%;
-            border: 1px solid white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            transition: all 0.3s ease;
-            cursor: pointer;
+        const containerWidth = container.offsetWidth;
+        const containerHeight = container.offsetHeight;
+
+        let index = 0;
+        currentAnimationInterval = setInterval(() => {
+            if (index >= path.length - 1) {
+                clearInterval(currentAnimationInterval);
+                currentAnimationInterval = null;
+                console.log('Kapal sampai di tujuan 🚢');
+                return;
+            }
+
+            const { top, left } = path[index];
+            const { top: nextTop, left: nextLeft } = path[index + 1];
+
+            // Update Virtual Map
+            shipIcon.style.top = top + 'px';
+            shipIcon.style.left = left + 'px';
+
+            // Hitung sudut rotasi
+            const dx = nextLeft - left;
+            const dy = nextTop - top;
+            const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+            const rotation = angle + 45;
+
+            const arrow = shipIcon.querySelector('i');
+            if (arrow) {
+                arrow.style.transform = `rotate(${rotation}deg)`;
+            }
+
+            // Jejak lintasan di Virtual Map
+            const trail = document.createElement('div');
+            trail.className = 'trail-dot route-element';
+            trail.style.position = 'absolute';
+            trail.style.width = '5px';
+            trail.style.height = '5px';
+            trail.style.borderRadius = '50%';
+            trail.style.backgroundColor = '#1976D2';
+            trail.style.opacity = '0.6';
+            trail.style.top = (top + 10) + 'px';
+            trail.style.left = (left + 8) + 'px';
+            container.appendChild(trail);
+
+            // Update Satellite Map - HANYA TRAIL
+            const latLng = pixelToLatLng(top, left, containerWidth, containerHeight);
+            trailCoordinates.push(latLng);
+
+            if (satellitePolyline) {
+                map.removeLayer(satellitePolyline);
+            }
+            satellitePolyline = L.polyline(trailCoordinates, {
+                color: '#1976D2',
+                weight: 3,
+                opacity: 0.7
+            }).addTo(map);
+
+            map.panTo(latLng);
+
+            index++;
+        }, speed);
+    }
+
+    // ========================================
+    // UPDATE VIRTUAL MAP
+    // ========================================
+    function updateVirtualMap(route) {
+        const virtualMapGrid = document.querySelector('.map-grid');
+        if (!virtualMapGrid) return;
+
+        // Remove ALL existing elements
+        const oldElements = virtualMapGrid.querySelectorAll('.route-element, .ship-icon, .trail-dot');
+        oldElements.forEach(el => el.remove());
+
+        const specificElements = virtualMapGrid.querySelectorAll('.b-label, .red-dot, .green-dot, .green-rect, .blue-rect, .biggreen-rect, .anchor-logo');
+        specificElements.forEach(el => el.remove());
+
+        // Clear satellite map
+        if (satellitePolyline) {
+            map.removeLayer(satellitePolyline);
+            satellitePolyline = null;
         }
 
+        console.log('Cleared all elements, switching to route:', route);
 
-         .green-rect {
-            position: absolute;
-            width: 16px;
-            height: 8px;
-            background-color: #2ecc71;
-            border-radius: 1px;
-            border: 1px solid white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            transition: all 0.3s ease;
-            cursor: pointer;
+        if (route === 'A') {
+            createLintasanA(virtualMapGrid);
+        } else if (route === 'B') {
+            createLintasanB(virtualMapGrid);
         }
+    }
 
-        .biggreen-rect {
-            position: absolute;
-            width: 22px;
-            height: 13px;
-            background-color: #2ecc71;
-            border-radius: 1px;
-            border: 1px solid white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            transition: all 0.3s ease;
-            cursor: pointer;
+    // ========================================
+    // MIRROR POSITION HELPER
+    // ========================================
+    function mirrorPosition(left) {
+        const leftPercent = parseFloat(left);
+        return (100 - leftPercent) + '%';
+    }
+
+    // ========================================
+    // CREATE LINTASAN A
+    // ========================================
+    function createLintasanA(container) {
+        const aLabel = document.createElement('div');
+        aLabel.className = 'b-label route-element';
+        aLabel.textContent = 'A';
+        aLabel.style.top = '185px';
+        aLabel.style.left = '50.5%';
+        container.appendChild(aLabel);
+
+        const shipIcon = document.createElement('div');
+        shipIcon.className = 'ship-icon route-element';
+        shipIcon.style.position = 'absolute';
+        shipIcon.style.top = '270px';
+        shipIcon.style.left = '325px';
+        shipIcon.style.zIndex = '100';
+        shipIcon.innerHTML = `<i class="fa-solid fa-location-arrow" style="font-size: 18px; color: #455A64; filter: drop-shadow(0 0 3px #0D47A1); transform: rotate(-45deg); transition: transform 0.2s linear;"></i>`;
+        container.appendChild(shipIcon);
+
+        const directions = [
+            'up','up','up','up','up','up','up','up','up','up','up',
+            'up-left','up-left','up-left','up-left','up-left','left',
+            'left','up-left','up','up','up-right','up','up-right','right',
+            'up-right','right','up-right','right','right','right','right',
+            'up-right','up','up','up','up','up','up','up','up-left','left',
+            'up-left','up-left','up-left','up-left','up-left','up-left','up-left',
+            'up-left','up-left','left','left','up-left','up-left','up-left','up-left',
+            'up-left','left','up-left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','left','down-left','left','left','down-left','down-left','down','left','left','left','left','left','down-left','down-left','down-left','down-left','down-left','down-left','down-left','down-left','left','left','down-left','down-left','down-left','down','down','down','down-left','down-left','down-left','down-left','down-left','down-left','down-left','down-left','down-left','down','down','down','down-left','down','down','down','down','down','down','down','down','down','down-right','down-right','right','-down-right','right','down-right','right','right','down-right','down-right','down-right','down-right','right','down-right','right','down-right','right','down','down','right','right','down-right'
+        ];
+
+        const shipPath = generatePath(270, 325, directions, 5);
+        animateShip(container, shipIcon, shipPath, 700);
+        addLintasanAMarkers(container);
+    }
+
+    // ========================================
+    // CREATE LINTASAN B
+    // ========================================
+    function createLintasanB(container) {
+        const bLabel = document.createElement('div');
+        bLabel.className = 'b-label route-element';
+        bLabel.textContent = 'B';
+        bLabel.style.top = '185px';
+        bLabel.style.left = mirrorPosition('50.5%');
+        container.appendChild(bLabel);
+
+        const shipIcon = document.createElement('div');
+        shipIcon.className = 'ship-icon route-element';
+        shipIcon.style.position = 'absolute';
+        shipIcon.style.top = '270px';
+        shipIcon.style.left = '35px';
+        shipIcon.style.zIndex = '100';
+        shipIcon.innerHTML = `<i class="fa-solid fa-location-arrow" style="font-size: 18px; color: #455A64; filter: drop-shadow(0 0 3px #0D47A1); transform: rotate(135deg); transition: transform 0.2s linear;"></i>`;
+        container.appendChild(shipIcon);
+
+        const directions = [
+            'up','up','up','up','up','up','up','up','up','up','up',
+            'up-right','up-right','up-right','up-right','up-right','right',
+            'right','up-right','up','up','up-left','up','up-left','left',
+            'up-left','left','up-left','left','left','left','left',
+            'up-left','up','up','up','up','up','up','up','up-right','right',
+            'up-right','up-right','up-right','up-right','up-right','up-right','up-right',
+            'up-right','up-right','right','right','up-right','up-right','up-right','up-right',
+            'up-right','right','up-right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','right','down-right','right','right','down-right','down-right','down','right','right','right','right','right','down-right','down-right','down-right','down-right','down-right','down-right','down-right','down-right','right','right','down-right','down-right','down-right','down','down','down','down-right','down-right','down-right','down-right','down-right','down-right','down-right','down-right','down-right','down','down','down','down-right','down','down','down','down','down','down','down','down','down','down-left','down-left','left','-down-left','left','down-left','left','left','down-left','down-left','down-left','down-left','left','down-left','left','down-left','left','down','down','left','left','down-left'
+        ];
+
+        const shipPath = generatePath(270, 35, directions, 5);
+        animateShip(container, shipIcon, shipPath, 700);
+        addLintasanBMarkers(container);
+    }
+
+    // ========================================
+    // ADD MARKERS - LINTASAN A
+    // ========================================
+    function addLintasanAMarkers(container) {
+        const redDotsA = [
+            { top: '227px', left: '8%' },
+            { top: '170px', left: '8%' },
+            { top: '120px', left: '12%' },
+            { top: '55px', left: '41%' },
+            { top: '55px', left: '48%' },
+            { top: '55px', left: '55%' },
+            { top: '55px', left: '62%' },
+            { top: '154px', left: '89%' },
+            { top: '197px', left: '81%' },
+            { top: '230px', left: '85%' }
+        ];
+
+        redDotsA.forEach(pos => {
+            const dot = document.createElement('div');
+            dot.className = 'red-dot route-element';
+            dot.style.top = pos.top;
+            dot.style.left = pos.left;
+            container.appendChild(dot);
+        });
+
+        const greenDotsA = [
+            { top: '227px', left: '15%' },
+            { top: '170px', left: '15%' },
+            { top: '120px', left: '18%' },
+            { top: '35px', left: '41%' },
+            { top: '35px', left: '48%' },
+            { top: '35px', left: '55%' },
+            { top: '35px', left: '62%' },
+            { top: '154px', left: '96%' },
+            { top: '197px', left: '87%' },
+            { top: '230px', left: '91%' }
+        ];
+
+        greenDotsA.forEach(pos => {
+            const dot = document.createElement('div');
+            dot.className = 'green-dot route-element';
+            dot.style.top = pos.top;
+            dot.style.left = pos.left;
+            container.appendChild(dot);
+        });
+
+        const greenRect = document.createElement('div');
+        greenRect.className = 'green-rect route-element';
+        greenRect.style.top = '276px';
+        greenRect.style.left = '14%';
+        container.appendChild(greenRect);
+
+        const blueRect = document.createElement('div');
+        blueRect.className = 'blue-rect route-element';
+        blueRect.style.top = '304px';
+        blueRect.style.left = '22%';
+        container.appendChild(blueRect);
+
+        const bigGreenRect = document.createElement('div');
+        bigGreenRect.className = 'biggreen-rect route-element';
+        bigGreenRect.style.top = '338px';
+        bigGreenRect.style.left = '85%';
+        container.appendChild(bigGreenRect);
+
+        const anchorLogo = document.createElement('div');
+        anchorLogo.className = 'anchor-logo route-element';
+        anchorLogo.style.top = '312px';
+        anchorLogo.style.left = '88%';
+        anchorLogo.innerHTML = '<i class="ri-anchor-fill" style="color:#7a7a7a; font-size:30px;"></i>';
+        container.appendChild(anchorLogo);
+    }
+
+    // ========================================
+    // ADD MARKERS - LINTASAN B
+    // ========================================
+    function addLintasanBMarkers(container) {
+        const redDotsA = [
+            { top: '227px', left: '8%' },
+            { top: '170px', left: '8%' },
+            { top: '120px', left: '12%' },
+            { top: '55px', left: '41%' },
+            { top: '55px', left: '48%' },
+            { top: '55px', left: '55%' },
+            { top: '55px', left: '62%' },
+            { top: '154px', left: '89%' },
+            { top: '197px', left: '81%' },
+            { top: '230px', left: '85%' }
+        ];
+
+        redDotsA.forEach(pos => {
+            const dot = document.createElement('div');
+            dot.className = 'red-dot route-element';
+            dot.style.top = pos.top;
+            dot.style.left = mirrorPosition(pos.left);
+            container.appendChild(dot);
+        });
+
+        const greenDotsA = [
+            { top: '227px', left: '15%' },
+            { top: '170px', left: '15%' },
+            { top: '120px', left: '18%' },
+            { top: '35px', left: '41%' },
+            { top: '35px', left: '48%' },
+            { top: '35px', left: '55%' },
+            { top: '35px', left: '62%' },
+            { top: '154px', left: '96%' },
+            { top: '197px', left: '87%' },
+            { top: '230px', left: '91%' }
+        ];
+
+        greenDotsA.forEach(pos => {
+            const dot = document.createElement('div');
+            dot.className = 'green-dot route-element';
+            dot.style.top = pos.top;
+            dot.style.left = mirrorPosition(pos.left);
+            container.appendChild(dot);
+        });
+
+        const greenRect = document.createElement('div');
+        greenRect.className = 'green-rect route-element';
+        greenRect.style.top = '276px';
+        greenRect.style.left = mirrorPosition('14%');
+        container.appendChild(greenRect);
+
+        const blueRect = document.createElement('div');
+        blueRect.className = 'blue-rect route-element';
+        blueRect.style.top = '304px';
+        blueRect.style.left = mirrorPosition('22%');
+        container.appendChild(blueRect);
+
+        const bigGreenRect = document.createElement('div');
+        bigGreenRect.className = 'biggreen-rect route-element';
+        bigGreenRect.style.top = '338px';
+        bigGreenRect.style.left = mirrorPosition('85%');
+        container.appendChild(bigGreenRect);
+
+        const anchorLogo = document.createElement('div');
+        anchorLogo.className = 'anchor-logo route-element';
+        anchorLogo.style.top = '312px';
+        anchorLogo.style.left = mirrorPosition('88%');
+        anchorLogo.innerHTML = '<i class="ri-anchor-fill" style="color:#7a7a7a; font-size:30px;"></i>';
+        container.appendChild(anchorLogo);
+    }
+
+    // ========================================
+    // UPDATE BUTTON STATES
+    // ========================================
+    function updateButtonStates(activeRoute) {
+        routeButtons.forEach(btn => btn.classList.remove('active', 'secondary'));
+
+        if (activeRoute === 'A') {
+            lintasanABtn.classList.add('active');
+            lintasanBBtn.classList.add('secondary');
+        } else if (activeRoute === 'B') {
+            lintasanBBtn.classList.add('active');
+            lintasanABtn.classList.add('secondary');
         }
+    }
 
-            .biggred-rect {
-            position: absolute;
-            width: 22px;
-            height: 13px;
-            background-color:  #e74c3c;
-            border-radius: 1px;
-            border: 1px solid white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            transition: all 0.3s ease;
-            cursor: pointer;
+    // ========================================
+    // BUTTON EVENT LISTENERS
+    // ========================================
+    lintasanABtn.addEventListener('click', function() {
+        selectedRoute = 'A';
+        isStarted = false;
+        updateButtonStates('A');
+        startBtn.classList.remove('active');
+        updateVirtualMap('A');
+        console.log('Lintasan A dipilih (ORIGINAL)');
+    });
+
+    lintasanBBtn.addEventListener('click', function() {
+        selectedRoute = 'B';
+        isStarted = false;
+        updateButtonStates('B');
+        startBtn.classList.remove('active');
+        updateVirtualMap('B');
+        console.log('Lintasan B dipilih (MIRROR dari A)');
+    });
+
+    startBtn.addEventListener('click', function() {
+        if (!selectedRoute) {
+            alert('Pilih lintasan terlebih dahulu (A atau B)');
+            return;
         }
+        isStarted = true;
+        startBtn.classList.add('active');
+        console.log('Misi dimulai dengan Lintasan ' + selectedRoute);
+    });
 
-        .blue-rect {
-            position: absolute;
-            width: 16px;
-            height: 8px;
-            background-color: blue;
-            border-radius: 1px;
-            border: 1px solid white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            transition: all 0.3s ease;
-            cursor: pointer;
+    // ========================================
+    // VIDEO STREAM FUNCTIONALITY
+    // ========================================
+    const surfaceStream = document.getElementById('surface-stream');
+    const underwaterStream = document.getElementById('underwater-stream');
+    const surfaceStatus = document.getElementById('surface-status');
+    const underwaterStatus = document.getElementById('underwater-status');
+
+    function takeSnapshot(imgElement, streamName) {
+        try {
+            if (!imgElement || !imgElement.complete) {
+                console.warn('Stream tidak tersedia untuk snapshot');
+                return;
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = imgElement.naturalWidth || 1280;
+            canvas.height = imgElement.naturalHeight || 720;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
+
+            const dataUrl = canvas.toDataURL('image/png');
+            const a = document.createElement('a');
+            a.href = dataUrl;
+            a.download = streamName + '_' + new Date().toISOString().replace(/[:.]/g, '-') + '.png';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+
+            console.log('Snapshot saved: ' + streamName);
+        } catch (err) {
+            console.error('Snapshot gagal:', err);
         }
+    }
 
-  .anchor-logo {
-  position: absolute;
-  color: #6e6e6e; /* abu-abu netral */
-  font-size: 27px; /* ukuran tetap sama */
-  transform: translate(-50%, -50%);
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3)); /* bayangan halus */
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
+    // Snapshot buttons
+    const btnSnapshotSurface = document.getElementById('btn-snapshot-surface');
+    const btnSnapshotUnderwater = document.getElementById('btn-snapshot-underwater');
 
-.anchor-logo:hover {
-  color: #8c8c8c; /* sedikit lebih terang saat hover */
-  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.4));
-}
+    if (btnSnapshotSurface) {
+        btnSnapshotSurface.addEventListener('click', function() {
+            takeSnapshot(surfaceStream, 'surface');
+        });
+    }
 
+    if (btnSnapshotUnderwater) {
+        btnSnapshotUnderwater.addEventListener('click', function() {
+            takeSnapshot(underwaterStream, 'underwater');
+        });
+    }
 
+    // Stream status monitoring
+    if (surfaceStream) {
+        surfaceStream.addEventListener('load', function() {
+            surfaceStatus.textContent = 'LIVE';
+            surfaceStatus.classList.remove('offline');
+        });
 
+        surfaceStream.addEventListener('error', function() {
+            surfaceStatus.textContent = 'OFFLINE';
+            surfaceStatus.classList.add('offline');
+        });
+    }
 
-/* Style untuk tulisan B */
-.map-container .map-grid .b-label {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  background-color: transparent;
-  color: rgba(255, 77, 77, 0.35);
-  font-weight: 900;
-  font-size: 70px;
-  font-family: 'Arial Black', sans-serif;
-  text-shadow: 
-    0 0 15px rgba(255, 77, 77, 0.3),
-    0 0 30px rgba(255, 77, 77, 0.2),
-    1px 1px 3px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 10;
-  opacity: 0.6;
-  letter-spacing: 2px;
-}
+    if (underwaterStream) {
+        underwaterStream.addEventListener('load', function() {
+            underwaterStatus.textContent = 'LIVE';
+            underwaterStatus.classList.remove('offline');
+        });
 
-/* Efek hover */
-.map-container .map-grid .b-label:hover {
-  transform: translate(-50%, -50%) scale(1.15);
-  color: rgba(255, 26, 26, 0.7);
-  opacity: 1;
-  text-shadow: 
-    0 0 20px rgba(255, 26, 26, 0.6),
-    0 0 40px rgba(255, 26, 26, 0.4),
-    0 0 60px rgba(255, 26, 26, 0.2),
-    2px 2px 4px rgba(0, 0, 0, 0.2);
-  filter: blur(0.3px);
-}
+        underwaterStream.addEventListener('error', function() {
+            underwaterStatus.textContent = 'OFFLINE';
+            underwaterStatus.classList.add('offline');
+        });
+    }
 
-/* Animasi subtle pulse */
-@keyframes subtlePulse {
-  0%, 100% { 
-    opacity: 0.6;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% { 
-    opacity: 0.7;
-    transform: translate(-50%, -50%) scale(1.02);
-  }
-}
+    // ========================================
+    // LOGOUT FUNCTIONALITY
+    // ========================================
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging out...';
+                this.disabled = true;
 
-.map-container .map-grid .b-label {
-  animation: subtlePulse 4s ease-in-out infinite;
-}
+                setTimeout(() => {
+                    window.location.href = '/logout';
+                }, 1000);
+            }
+        });
+    }
 
-.map-container .map-grid .b-label:hover {
-  animation: none;
-}
+    // ========================================
+    // CHART FUNCTIONALITY
+    // ========================================
+    const speedData = {
+        labels: ['08:00', '08:05', '08:10', '08:15', '08:20', '08:25', '08:30', '08:35', '08:40', '08:45'],
+        datasets: [{
+            label: 'Kecepatan (knot)',
+            data: [0, 2.5, 3.8, 4.2, 3.9, 3.5, 3.2, 2.8, 2.1, 0],
+            borderColor: '#39d353',
+            backgroundColor: 'rgba(57, 211, 83, 0.1)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4
+        }]
+    };
 
+    const positionData = {
+        labels: ['Posisi 1', 'Posisi 2', 'Posisi 3', 'Posisi 4', 'Posisi 5', 'Posisi 6', 'Posisi 7', 'Posisi 8', 'Posisi 9', 'Posisi 10'],
+        datasets: [{
+            label: 'Latitude (°N)',
+            data: [5.5481, 5.5482, 5.5483, 5.5484, 5.5485, 5.5486, 5.5487, 5.5488, 5.5489, 5.5490],
+            borderColor: '#64b5f6',
+            backgroundColor: 'rgba(100, 181, 246, 0.1)',
+            borderWidth: 2,
+            fill: false,
+            yAxisID: 'y'
+        }, {
+            label: 'Longitude (°E)',
+            data: [95.3237, 95.3238, 95.3239, 95.3240, 95.3241, 95.3242, 95.3243, 95.3244, 95.3245, 95.3246],
+            borderColor: '#ffb74d',
+            backgroundColor: 'rgba(255, 183, 77, 0.1)',
+            borderWidth: 2,
+            fill: false,
+            yAxisID: 'y1'
+        }]
+    };
 
-/* Logo Navindra */
-.logo-navindra {
-  width: 165px;
-  height: auto;
-  display: block;
-  margin: -60px auto 10px auto; /* margin-top negatif */
-  transition: transform 0.3s ease;
-  
-}
+    const speedConfig = {
+        type: 'line',
+        data: speedData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Kecepatan Kapal vs Waktu',
+                    color: '#d9d9e2',
+                    font: { size: 14 }
+                },
+                legend: {
+                    labels: { color: '#d9d9e2' }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { color: '#9da0a9' }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { color: '#9da0a9' },
+                    title: {
+                        display: true,
+                        text: 'Kecepatan (knot)',
+                        color: '#9da0a9'
+                    }
+                }
+            }
+        }
+    };
+
+    const positionConfig = {
+        type: 'line',
+        data: positionData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Trajektori Posisi Kapal',
+                    color: '#d9d9e2',
+                    font: { size: 14 }
+                },
+                legend: {
+                    labels: { color: '#d9d9e2' }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { color: '#9da0a9' }
+                },
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { color: '#9da0a9' },
+                    title: {
+                        display: true,
+                        text: 'Latitude (°N)',
+                        color: '#9da0a9'
+                    }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: { drawOnChartArea: false },
+                    ticks: { color: '#9da0a9' },
+                    title: {
+                        display: true,
+                        text: 'Longitude (°E)',
+                        color: '#9da0a9'
+                    }
+                }
+            }
+        }
+    };
+
+    // Initialize charts
+    const speedChartEl = document.getElementById('speedChart');
+    const positionChartEl = document.getElementById('positionChart');
+
+    if (speedChartEl && typeof Chart !== 'undefined') {
+        const speedCtx = speedChartEl.getContext('2d');
+        const speedChart = new Chart(speedCtx, speedConfig);
+
+        const downloadSpeedBtn = document.getElementById('download-speed-chart');
+        if (downloadSpeedBtn) {
+            downloadSpeedBtn.addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.download = 'grafik-kecepatan.png';
+                link.href = speedChart.toBase64Image();
+                link.click();
+            });
+        }
+    }
+
+    if (positionChartEl && typeof Chart !== 'undefined') {
+        const positionCtx = positionChartEl.getContext('2d');
+        const positionChart = new Chart(positionCtx, positionConfig);
+
+        const downloadPositionBtn = document.getElementById('download-position-chart');
+        if (downloadPositionBtn) {
+            downloadPositionBtn.addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.download = 'grafik-posisi.png';
+                link.href = positionChart.toBase64Image();
+                link.click();
+            });
+        }
+    }
+
+    // ========================================
+    // TIME UPDATE FUNCTION
+    // ========================================
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('id-ID');
+        const dateString = now.toLocaleDateString('id-ID');
+        const dayString = now.toLocaleDateString('id-ID', { weekday: 'long' });
+
+        const geoValues = document.querySelectorAll('.geo-value');
+        if (geoValues.length >= 3) {
+            geoValues[2].textContent = timeString;
+            geoValues[1].textContent = dateString;
+            geoValues[0].textContent = dayString;
+        }
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // ========================================
+    // INITIALIZE WITH LINTASAN A
+    // ========================================
+    selectedRoute = 'A';
+    updateButtonStates('A');
+    updateVirtualMap('A');
+
+    console.log('Ship Monitoring System initialized successfully');
+});
+
+// ========================================
+// LEAFLET MAP INITIALIZATION
+// ========================================
+var map = L.map('map').setView([3.559589663827306, 98.65746192628275], 20);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+// Tidak ada marker kapal di satellite map - hanya akan muncul trail saat animasi berjalan
